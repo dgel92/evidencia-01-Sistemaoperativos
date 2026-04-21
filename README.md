@@ -37,17 +37,22 @@ Se utilizó un script de estrés en Python (`prueba1.py`) con las siguientes cap
 
 ## 🛠️ Instrucciones de Uso y Replicación
 
-### 1. Construcción de la Imagen
-Desde la terminal en la carpeta del proyecto:
-```bash
+### 1. Preparación del Entorno
+Dentro de la carpeta del proyecto, asegúrese de tener el script `prueba1.py` y cree un archivo llamado `Dockerfile` con el siguiente contenido:
 
-### 1. Prueba de CPU.
+```dockerfile
+FROM python:3.11-slim
+WORKDIR /app
+COPY prueba1.py .
+CMD ["python", "prueba1.py"]
+
+### 2. Prueba de CPU.
 docker run --name cont-cpu --rm --cpus="1.0" experimento-abp > experimento_cpu.log 2>&1
 
-### 2. Prueba de RAM.
+### 3. Prueba de RAM.
 docker run --name cont-ram --rm --memory="410m" --memory-swap="410m" experimento-abp > experimento_ram.log 2>&1
 
 
-### Verificar evidencia.
+### 4. Verificar evidencia.
 cat experimento_cpu.log
 docker build -t experimento-abp .
